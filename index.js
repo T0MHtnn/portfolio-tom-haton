@@ -6,6 +6,9 @@ const infoBoxes = document.querySelectorAll(".info");
 const bg = document.querySelector(".animated-bg");
 const avatar = document.getElementById("avatar");
 const chemin = document.querySelector(".chemin");
+const scene = document.querySelector(".scene");
+let lastAvatarY = 0;
+let avatarManualY = null;
 
 //Ce code se déclenche au chargement de la page, et force le scroll tout en haut.
 window.addEventListener("load", () => {
@@ -40,7 +43,7 @@ skillsButtons.forEach((btn) => {
   });
 });
 
-document.querySelector(".infos-section").classList.add("active"); // Affiche la première section par défaut
+// document.querySelector(".skills-section").classList.add("active"); // Affiche la première section par défaut
 
 infosButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -52,7 +55,7 @@ infosButtons.forEach((btn) => {
   });
 });
 
-document.querySelector(".infos-section").classList.add("active"); // Affiche la première section par défaut
+// document.querySelector(".infos-section").classList.add("active"); // Affiche la première section par défaut
 
 //Effet Tilt 3D
 infoBoxes.forEach((box) => {
@@ -161,53 +164,51 @@ window.addEventListener("scroll", () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollPercent = scrollTop / docHeight;
 
-  const sceneHeight = document.querySelector(".scene").offsetHeight;
+  const sceneHeight = scene.offsetHeight;
   const avatarY = scrollPercent * sceneHeight;
+  const maxY = sceneHeight - avatar.offsetHeight;
 
-  avatar.style.top = `${avatarY}px`;
+  const clampedY = Math.min(avatarY, maxY);
+  // Si position manuelle existe, vérifier si elle est visible
+  if (avatarManualY !== null) {
+    const viewportTop = scrollTop;
+    const viewportBottom = scrollTop + window.innerHeight;
+
+    const avatarBottom = avatarManualY + avatar.offsetHeight;
+    const avatarTop = avatarManualY;
+
+    let adjustedY = avatarManualY;
+
+    // Si le bas de l’avatar dépasse le bas de l’écran
+    if (avatarBottom > viewportBottom) {
+      adjustedY -= avatarBottom - viewportBottom;
+    }
+
+    // Si le haut de l’avatar dépasse le haut de l’écran
+    if (avatarTop < viewportTop) {
+      adjustedY += viewportTop - avatarTop;
+    }
+
+    // Clamp à la scène
+    adjustedY = Math.max(0, Math.min(adjustedY, maxY));
+
+    avatar.style.top = `${adjustedY}px`;
+    avatarManualY = adjustedY;
+  } else {
+    avatar.style.top = `${clampedY}px`;
+  }
 });
 
 //Avatar qui va au click
 chemin.addEventListener("click", (e) => {
-  const cheminRect = chemin.getBoundingClientRect();
-  const clickY = e.clientY - cheminRect.top;
-
   // Position relative à la scène
-  const sceneTop = document.querySelector(".scene").getBoundingClientRect().top;
+  const sceneTop = scene.getBoundingClientRect().top;
   const avatarY = e.clientY - sceneTop;
+  const maxY = scene.offsetHeight - avatar.offsetHeight;
 
-  avatar.style.top = `${avatarY}px`;
-});
-
-//Révèle la box quand l'avatar l'atteint
-function checkAvatarProximity() {
-  const avatarTop = avatar.getBoundingClientRect().top + window.scrollY;
-
-  infoBoxes.forEach((box) => {
-    const boxTop = box.offsetTop;
-    const distance = Math.abs(avatarTop - boxTop);
-
-    if (distance < 100 && !box.classList.contains("revealed")) {
-      box.classList.add("revealed");
-    }
-  });
-}
-
-window.addEventListener("scroll", () => {
-  // ton code existant pour déplacer l'avatar
-  checkAvatarProximity();
-});
-
-//Révéler la box au click
-boxes.forEach((box) => {
-  box.addEventListener("click", () => {
-    const boxTop = box.offsetTop;
-    avatar.style.top = `${boxTop}px`;
-
-    setTimeout(() => {
-      box.classList.add("revealed");
-    }, 400); // laisse le temps à l’avatar d’arriver
-  });
+  const clampedY = Math.min(avatarY, maxY);
+  avatarManualY = clampedY; // stocker la position manuelle
+  avatar.style.top = `${clampedY}px`;
 });
 
 //Avatar interactif
@@ -215,3 +216,28 @@ function triggerAvatarInteraction() {
   avatar.classList.add("interact");
   setTimeout(() => avatar.classList.remove("interact"), 600);
 }
+
+//Avatar qui ne dépasse pas le chemin
+// document.addEventListener("scroll", () => {
+//   const maxY = scene.offsetHeight - avatar.offsetHeight;
+//   const scrollY = window.scrollY;
+//   const clampedY = Math.min(scrollY, maxY);
+//   avatar.style.top = `${clampedY}px`;
+// });
+
+//box en subrillance a l'approche de la souris
+// document.addEventListener("mousemove", (e) => {
+//   document.querySelectorAll(".info").forEach((box) => {
+//     const rect = box.getBoundingClientRect();
+//     const x = e.clientX - rect.left;
+//     const y = e.clientY - rect.top;
+
+//     const centerX = rect.width / 2;
+//     const centerY = rect.height / 2;
+
+//     const offsetX = (x - centerX) / 8;
+//     const offsetY = (y - centerY) / 8;
+
+//     box.style.boxShadow = `${offsetX}px ${offsetY}px 25px rgba(255, 255, 255, 0.2)`;
+//   });
+// });
