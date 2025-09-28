@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio 3D - Maquette</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </head>
+    <body>
+        <div class="scene">
+            <div class="chemin"></div>
+
+            <model-viewer src="assets/avatar.glb" alt="Avatar de Tom"
+            camera-controls
+            disable-zoom
+            interaction-prompt="none"
+            id="avatar">
+            </model-viewer>
+
+            <div class="info info-left un">
+                <h2>Informations</h2>
+                <nav class="infos-nav">
+                    <button data-target="perso">Personnelles</button>
+                    <button data-target="lang">Langues</button>
+                    <button data-target="centInter">Centres d'intérêts</button>
+                </nav>
+
+                <div class="infos-section" id="perso">
+                    <ul>
+                        <li>Nom : Tom Haton</li>
+                        <li>Adresse e-mail : tomhatonlcsm@gmail.com</li>
+                        <li>Numéro de téléphone : 06.60.99.67.11</li>
+                        <li>Adresse : 48 Avenue Lacassagne 69003, Lyon</li>
+                        <li>Permis B : véhiculé</li>
+                    </ul>
+                </div>
+
+                <div class="infos-section" id="lang">
+                    <ul>
+                        <li>Anglais : B2</li>
+                        <li>Allemand : A2</li>
+                    </ul>
+                </div>
+
+                <div class="infos-section" id="centInter">
+                    <ul>
+                        <li>Natation : 10ans</li>
+                        <li>Hockey : 13ans</li>
+                        <li>Percussions : 4ans</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="info info-right deux">
+                <h2>Profil</h2>
+                <p>
+                    Étudiant en Master Informatique à l’Université Claude Bernard (Lyon 1),
+                    je développe une expertise en développement web et en gestion de projets techniques.
+                    Curieux et autonome, je m’investis dans des projets open-source et collaboratifs,
+                    avec une forte sensibilité aux environnements agiles et aux outils modernes.
+                    Mon objectif : concevoir des solutions utiles, robustes et évolutives,
+                    tout en cultivant une approche innovante du développement logiciel.
+                </p>
+            </div>
+
+            <div class="info info-left trois">
+                <h2>Parcours</h2>
+                <ul>
+                    <li>Master informatique / Université Claude Bernanrd (69)</li>
+                    <li>Licence informatique / Université Tours (37)</li>
+                    <li>Baccalauréat  / Lycée Maurice Genevoix Ingré (45)</li>
+                    <ul>
+                        <li>Spécialité 1 : Mathématiques</li>
+                        <li> Spécialité 2 : Sciences de l’ingénieur</li>
+                    </ul>
+                </ul>
+            </div>
+
+            <div class="info info-right quatre">
+                <h2>Compétences</h2>
+
+                <nav class="skills-nav">
+                    <button data-target="dev">Développement</button>
+                    <button data-target="db">Bases de données</button>
+                    <button data-target="model">Modélisation</button>
+                    <button data-target="system">Systèmes & Réseaux</button>
+                    <button data-target="tools">Outils</button>
+                </nav>
+
+                <div class="skills-section" id="dev">
+                    <ul>
+                    <li>Java, JavaFx, JEE</li>
+                    <li>Python</li>
+                    <li>HTML, CSS, PHP</li>
+                    <li>JavaScript</li>
+                    <li>OCaml, Scala</li>
+                    <li>C, C++</li>
+                    <li>Arduino</li>
+                    </ul>
+                </div>
+
+                <div class="skills-section" id="db">
+                    <ul>
+                    <li>MySQL</li>
+                    <li>Langage SQL</li>
+                    <li>PostgreSQL</li>
+                    </ul>
+                </div>
+
+                <div class="skills-section" id="model">
+                    <ul>
+                    <li>UML</li>
+                    <li>Merise (MCD, MLD)</li>
+                    <li>Tests unitaires</li>
+                    </ul>
+                </div>
+
+                <div class="skills-section" id="system">
+                    <ul>
+                    <li>Windows 10</li>
+                    <li>Linux</li>
+                    <li>Wireshark</li>
+                    <li>Cisco Packet Tracer</li>
+                    <li>Git, GitHub</li>
+                    </ul>
+                </div>
+
+                <div class="skills-section" id="tools">
+                    <ul>
+                    <li>LibreOffice, Word, Excel, PowerPoint</li>
+                    <li>Photoshop, Canva, Figma</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info info-left cinq">
+                <h2>Expériences à caractère professionnel</h2>
+                <ul>
+                    <li>Général : Quelques bases en domotique</li>
+                    <li>Stage 2025 : 3 mois de stage en développement logiciel Spring Boot - Angular</li>
+                    <li>Projet L3 : Proposition de programmes thérapeutiques pour des
+                        personnes atteintes de différentes pathologies via une
+                        application web Spring Boot
+                    </li>
+                    <li>Projet L3 : Création de l’application Horloge de son téléphone avec interface
+                        graphique en Python
+                    </li>
+                    <li>Projet L2 : Gestion d'hôtels via une interface graphique suivant un
+                        cahier des charges
+                    </li>
+                    <li>Projet L2 : Gestion d’un emploi du temps hospitalier suivant un cahier
+                        des charges
+                    </li>
+                </ul>
+            </div>
+
+            <div class="info info-right six">
+                <h2>Jobs étudiants</h2>
+                <ul>
+                    <li>Plongeur :  En restaurant (1 mois)</li>
+                    <li>Agent de quai : Déchargement de camions (1,5 mois)</li>
+                    <li>Préparateur de commande : Triage et palettisation de produits frais (2 mois)</li>
+                </ul>
+            </div>
+
+            <div class="info info-left sept">
+                <h2>Documents</h2>
+                <ul>
+                    <li><a target="_blank" href="assets/CV.pdf" download>CV</a></li>
+                    <li>?</li>
+                    <li>?</li>
+                </ul>
+            </div>
+
+            <div class="info info-left huit">
+                <h2>Contact</h2>
+                <ul>
+                    <li><a target="_blank" href="https://github.com/T0MHtnn/">GitHub</a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/in/tom-haton-7aa346253/">LinkedIn</a></li>
+                    <li><a target="_blank" href="mailto:tomhatonlcsm@gmail.com">Email</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
